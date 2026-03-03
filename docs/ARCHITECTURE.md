@@ -26,9 +26,18 @@
 │          ┌────────────────────────────┼──────────────┐     │
 │          │                            │              │     │
 │   ┌──────▼──────┐   ┌─────────────────▼──┐   ┌──────▼──┐  │
-│   |Google Vision│   │  NTA Invoice │  │ (future:     │
-│   │ API (OCR)    │   │  API         │  │  AMEX CSV)   │
-│   └───────────────┘   └──────────────┘  └──────────────┘
+│   │  SQLite DB  │   │  AllReceipts/       │   │ audit   │  │
+│   │ receipts.db │   │  FY2027/04_Apr/     │   │ .log    │  │
+│   └─────────────┘   │  *.pdf              │   └─────────┘  │
+│                     └────────────────────┘                 │
+└─────────────────────────────────────────────────────────────┘
+                           │
+         ┌─────────────────┼──────────────────┐
+         │                 │                  │
+┌────────▼──────┐  ┌───────▼──────┐  ┌───────▼──────┐
+│Google Vision  │  │  NTA Invoice │  │ (future:     │
+│ API (OCR)     │  │  API         │  │  AMEX CSV)   │
+└───────────────┘  └──────────────┘  └──────────────┘
 ```
 
 ---
@@ -42,7 +51,6 @@ receipt-capture-app/
 ├── REQUIREMENTS.md
 ├── ARCHITECTURE.md
 ├── COMPLIANCE.md
-├── AGENT.md
 ├── dev.sh                        # starts both frontend and backend
 │
 ├── backend/
@@ -57,7 +65,7 @@ receipt-capture-app/
 │   │   ├── audit.py              # GET /audit/verify
 │   │   └── vendors.py            # GET/POST/PUT /vendors
 │   ├── services/
-│   │   ├── ocr_service.py        # Google Vision API wrapper
+│   │   ├── ocr_service.py        # glm-ocr API wrapper
 │   │   ├── filing_service.py     # filename generation, folder routing
 │   │   ├── nta_service.py        # NTA Invoice API + cache
 │   │   ├── audit_service.py      # append-only log writer
@@ -347,8 +355,8 @@ For a stable always-on setup, run the backend as a launchd service on the server
 ```bash
 # backend/.env.example
 
-# Google Cloud Vision API
-GOOGLE_CLOUD_VISION_API_KEY=your_key_here
+# glm-ocr API
+GLM_OCR_API_KEY=your_key_here
 
 # File storage
 RECEIPTS_BASE_PATH=/Users/you/AllReceipts
@@ -378,8 +386,7 @@ fastapi>=0.111.0
 uvicorn[standard]>=0.29.0
 sqlmodel>=0.0.18
 python-multipart>=0.0.9
-google-cloud-vision>=3.7.0
-httpx>=0.27.0          # async HTTP for NTA API calls
+httpx>=0.27.0          # async HTTP for glm-ocr and NTA API calls
 python-dotenv>=1.0.0
 aiofiles>=23.2.0
 Pillow>=10.3.0         # image pre-processing before OCR

@@ -12,7 +12,7 @@ One Mac runs the server. Every other Mac (or iPhone) opens a browser tab and use
 |---|---|---|
 | Backend | Python 3.11+ / FastAPI | Fast to vibe-code, async file I/O, great Japanese UTF-8 handling |
 | Database | SQLite (via SQLModel) | Zero-config, single file, sufficient for ~200 receipts/year |
-| OCR | Google Vision API | Best accuracy on Japanese receipts and mixed-currency amounts |
+| OCR | Google Cloud Vision API | Best accuracy on Japanese receipts and mixed-currency amounts |
 | Frontend | React + Vite (single page) | Camera API access, drag-drop upload, runs in any browser |
 | File store | Local filesystem | AllReceipts folder (existing structure preserved) |
 | NTA Validation | NTA Invoice API (REST) | Live validation of 登録番号 (T + 13 digits) |
@@ -24,7 +24,7 @@ One Mac runs the server. Every other Mac (or iPhone) opens a browser tab and use
 ### Prerequisites
 - Python 3.11+
 - Node 18+
-- A Google Cloud project with Vision API enabled
+- A Google Cloud project with Vision API enabled (billing required)
 - The `AllReceipts/` folder path on this machine
 
 ```bash
@@ -58,7 +58,7 @@ To find your server IP: `ipconfig getifaddr en0`
 ## Environment Variables (`.env`)
 
 ```
-GOOGLE_VISION_API_KEY=your_key_here
+GOOGLE_CLOUD_VISION_API_KEY=your_key_here
 RECEIPTS_BASE_PATH=/Users/you/AllReceipts
 DB_PATH=/Users/you/AllReceipts/receipts.db
 AUDIT_LOG_PATH=/Users/you/AllReceipts/audit.log

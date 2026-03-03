@@ -1,0 +1,61 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+eggs/
+.eggs/
+.venv/
+venv/
+ENV/
+env/
+
+# Environment variables with secrets
+backend/.env
+.env
+*.env
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+receipts.db
+
+# Audit logs
+*.log
+audit.log
+
+# Uploaded files (temporary storage)
+/tmp/receipt_uploads/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Node
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+frontend/package-lock.json
+frontend/yarn.lock
+frontend/pnpm-lock.yaml
+
+# Test coverage
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Logs
+*.log
+
+# Google Cloud
+google-cloud-credentials.json
+gcloud-config.json

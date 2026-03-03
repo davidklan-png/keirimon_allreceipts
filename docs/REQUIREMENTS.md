@@ -176,7 +176,7 @@ GET https://web-api.invoice-kohyo.nta.go.jp/1/num?id=T{13-digit-number}&type=21
 **NFR-03 File safety:** The app MUST never modify or delete the original receipt file after filing. Filed PDFs are write-once.
 **NFR-04 Encoding:** All filenames, paths, and database strings MUST be UTF-8. All Japanese characters MUST be preserved without transliteration in display fields (only the filename `VENDOR` segment uses romaji).
 **NFR-05 Portability:** The `RECEIPTS_BASE_PATH` and `DB_PATH` MUST be configurable via `.env` so the app works regardless of where the AllReceipts folder is mounted on each Mac.
-**NFR-06 No external data storage:** No receipt data or metadata MUST be sent to any third party except: Google Vision API (image for OCR, no storage), and NTA Invoice API (registration number query only).
+**NFR-06 No external data storage:** No receipt data or metadata MUST be sent to any third party except: Google Cloud Vision API (image for OCR, no storage), and NTA Invoice API (registration number query only).
 **NFR-07 Browser support:** Latest versions of Safari and Chrome on macOS. Camera capture must work on Safari iOS 16+.
 
 ---
