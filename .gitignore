@@ -59,3 +59,6 @@ htmlcov/
 # Google Cloud
 google-cloud-credentials.json
 gcloud-config.json
+
+# Assets (keep mascot)
+!assets/mascot.png
